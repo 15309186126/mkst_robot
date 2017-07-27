@@ -33,17 +33,12 @@ dependencies {
     compile "net.qiujuer.genius:ui:$rootProject.ext.geniusVersion"
     compile "net.qiujuer.genius:res:$rootProject.ext.geniusVersion"
 
-    compile "de.hdodenhof:circleimageview:$rootProject.ext.circleimageviewVersion"
-    compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
-
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
 
-    compile "com.yalantis:ucrop:$rootProject.ext.ucropVersion"
-    compile "pub.devrel:easypermissions:$rootProject.ext.easyPMVersion"
+    compile "net.qiujuer.genius:kit-handler:$rootProject.ext.geniusVersion"
+    compile "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
 
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-
-    compile project(':common')
 }
