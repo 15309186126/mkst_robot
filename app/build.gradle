@@ -33,9 +33,6 @@ dependencies {
     compile "net.qiujuer.genius:ui:$rootProject.ext.geniusVersion"
     compile "net.qiujuer.genius:res:$rootProject.ext.geniusVersion"
 
-    compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
-
     compile "net.qiujuer.genius:kit-handler:$rootProject.ext.geniusVersion"
     compile "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
 

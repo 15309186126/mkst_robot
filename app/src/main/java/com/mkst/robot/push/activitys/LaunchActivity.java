@@ -19,7 +19,7 @@ import net.qiujuer.genius.ui.compat.UiCompat;
 /**
  * 作者: jiayi.zhang
  * 时间: 2017/7/27
- * 描述:
+ * 描述: 闪屏页
  */
 
 public class LaunchActivity extends Activity {
@@ -28,6 +28,8 @@ public class LaunchActivity extends Activity {
 
     @Override
     protected int getContentLayoutId() {
+        requestWindowFeature(1);
+        getWindow().setFlags(1024, 1024);
         return R.layout.activity_launch;
     }
 
@@ -105,12 +107,9 @@ public class LaunchActivity extends Activity {
         public void set(LaunchActivity object, Object value) {
             object.mBgDrawable.setColor((Integer) value);
         }
-
         @Override
         public Object get(LaunchActivity object) {
             return object.mBgDrawable.getColor();
         }
     };
-
-
 }
