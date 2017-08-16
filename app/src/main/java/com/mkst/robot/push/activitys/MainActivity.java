@@ -2,9 +2,13 @@ package com.mkst.robot.push.activitys;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.mkst.robot.push.R;
 import com.mkst.robot.push.app.Activity;
+import com.mkst.robot.push.service.ClientSocketUtil;
+import com.mkst.robot.push.service.ServerSocketUtil;
 import com.mkst.robot.push.service.SetStaticIPService;
 
 /**
@@ -14,7 +18,7 @@ import com.mkst.robot.push.service.SetStaticIPService;
  */
 public class MainActivity extends Activity {
 
-    public static boolean DeskIsEdit = false,AreaIsEdit = false;
+    public static boolean DeskIsEdit = false, AreaIsEdit = false;
     public static int Current_INDEX = 1;
 
     /**
@@ -28,15 +32,26 @@ public class MainActivity extends Activity {
 
     @Override
     protected int getContentLayoutId() {
-        requestWindowFeature(1);
-        getWindow().setFlags(1024, 1024);
+        // 隐藏标题栏
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // 隐藏状态栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.activity_main;
     }
 
     @Override
     protected void initWidget() {
         super.initWidget();
-        startService(new Intent(this, SetStaticIPService.class));
+        //静态Wifi服务
+        Intent SetStaticIPService = new Intent(this, SetStaticIPService.class);
+        startService(SetStaticIPService);
+        //启动后台通讯服务  服务端
+        Intent serverSocket = new Intent(this, ServerSocketUtil.class);
+        startService(serverSocket);
+/*        //启动后台通讯服务  客务端
+        Intent clientSocket = new Intent(this, ClientSocketUtil.class);
+        startService(clientSocket);*/
     }
 
     @Override

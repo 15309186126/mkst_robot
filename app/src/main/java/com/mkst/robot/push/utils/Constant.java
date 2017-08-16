@@ -13,10 +13,10 @@ import android.util.Log;
 public class Constant {
     //打印Log
     private static final String TAG = "Robot";
-    //Wifi名称
-    public static String wifiname = "MAIKESITE";
-    //Wifi密码
-    public static String password = "MKST8888";
+
+    //测试用
+    public static String wifiname = "MAIKESITE";//Wifi名称
+    public static String password = "MKST8888";//Wifi密码
 
     //wifi静态ip参数
     static final String dns1 = "192.168.1.1";
