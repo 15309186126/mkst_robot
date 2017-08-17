@@ -64,7 +64,7 @@ public class MyAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         } else {
             //每次需要使用的时候都会拿到这个持有类
-            convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
         //然后可以直接使用这个类中的控件，对控件进行操作，而不用重复去findViewById了
         ViewHolder.btn.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,7 @@ public class MyAdapter extends BaseAdapter {
             }
         });
 
-        switch ((int) list.get(position).get("type")) {
+        switch ((int)list.get(position).get("type")){
             case 0:
                 viewHolder.text.setText(R.string.straight);
                 break;

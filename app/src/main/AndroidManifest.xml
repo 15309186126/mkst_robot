@@ -57,9 +57,22 @@
             android:name=".activitys.AreaConfig"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        
+
         <activity
             android:name=".activitys.DeskConfigPathActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+
+        <activity
+            android:name=".activitys.CardConfig"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activitys.RobotConfigActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity
+            android:name=".activitys.CardConfigActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
 

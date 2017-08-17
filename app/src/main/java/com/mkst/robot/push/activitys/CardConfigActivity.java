@@ -8,18 +8,18 @@ import com.mkst.robot.push.app.Activity;
 
 /**
  * 作者: jiayi.zhang
- * 时间: 2017/8/16
+ * 时间: 2017/8/17
  * 描述:
  */
 
-public class RobotActivity extends Activity {
+public class CardConfigActivity extends Activity {
     @Override
     protected int getContentLayoutId() {
-        // 隐藏标题栏
+        //隐藏标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // 隐藏状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        return R.layout.activity_robot;
+        return R.layout.activity_cardactivity;
     }
 }

@@ -1,5 +1,7 @@
 package com.mkst.robot.push.activitys;
 
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.mkst.robot.push.R;
@@ -18,8 +20,8 @@ import java.util.Map;
 public class CommandAcitivty extends Activity {
     private RobotDBHelper robotDBHelper;
     private int command_id;
-    private Map commandconfig;
-    private List<Map> goallist;
+    private Map commandConfig;
+    private List<Map> goalList;
     private List<Map> list;
     private TextView speed, mp3, outime, shownum, showcolor;
     private TextView goal, direction;
@@ -27,6 +29,11 @@ public class CommandAcitivty extends Activity {
 
     @Override
     protected int getContentLayoutId() {
+        // 隐藏标题栏
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // 隐藏状态栏
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return R.layout.activity_command_config;
     }
 }

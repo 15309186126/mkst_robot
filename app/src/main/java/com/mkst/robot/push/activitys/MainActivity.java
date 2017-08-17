@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -316,15 +319,6 @@ public class MainActivity extends Activity implements View.OnClickListener, Anim
         gridViewAdapter = new GridViewAdapter(getApplicationContext(),
                 robotData_list);
         robotGirdView.setAdapter(gridViewAdapter);
-    }
-
-
-    /**
-     * 初始化数据
-     */
-    @Override
-    protected void initData() {
-
     }
 
     /**
@@ -862,4 +856,41 @@ public class MainActivity extends Activity implements View.OnClickListener, Anim
         } else {
         }
     }
+
+
+    // 定义一个变量，来标识是否退出
+    private static boolean isExit = false;
+
+    Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            isExit = false;
+        }
+    };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void exit() {
+        if (!isExit) {
+            isExit = true;
+            Toast.makeText(getApplicationContext(), "再按一次退出程序",
+                    Toast.LENGTH_SHORT).show();
+            // 利用handler延迟发送更改状态信息
+            mHandler.sendEmptyMessageDelayed(0, 2000);
+        } else {
+            finish();
+            System.exit(0);
+        }
+    }
+
+
 }

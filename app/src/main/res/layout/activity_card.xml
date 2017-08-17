@@ -38,7 +38,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:background="@animator/btn_add_desk_selector" />
+            android:background="@animator/btn_add_card_selector" />
     </RelativeLayout>
 
     <ListView
