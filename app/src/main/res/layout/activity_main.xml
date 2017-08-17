@@ -92,8 +92,8 @@
 
             <Button
                 android:id="@+id/config_redact"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="17dp"
@@ -210,7 +210,7 @@
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="4dp"
-        android:layout_marginRight="7dp"
+        android:layout_marginBottom="22dp"
+        android:layout_marginRight="12dp"
         android:background="@animator/btn_shrink_selector" />
 </RelativeLayout>

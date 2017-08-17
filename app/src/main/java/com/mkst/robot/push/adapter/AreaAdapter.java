@@ -27,6 +27,11 @@ public class AreaAdapter extends BaseAdapter {
     Context context;
     List<Map<String, Object>> list;
 
+    public AreaAdapter(Context context, List<Map<String, Object>> list) {
+        this.context = context;
+        this.list = list;
+    }
+
     @Override
     public int getCount() {
         return list.size();

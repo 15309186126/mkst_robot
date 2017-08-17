@@ -58,6 +58,7 @@
     <string name="card_list">系统卡列表</string>
     <string name="card_address">磁条编码</string>
     <string name="add_card">请输入系统卡名称</string>
+
     <array name="DATABASE_INFO">
         <item>robot.db</item>
         <item>1</item>

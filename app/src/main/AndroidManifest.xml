@@ -28,6 +28,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        <!--闪屏页-->
         <activity
             android:name=".activitys.LaunchActivity"
             android:theme="@style/AppTheme">
@@ -37,17 +38,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--主页-->
         <activity
             android:name=".activitys.MainActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".activitys.RobotActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+
         <activity
             android:name=".activitys.CommandAcitivty"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+
         <activity
             android:name=".activitys.AreaConfig"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        
+        <activity
+            android:name=".activitys.DeskConfigPathActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+
 
         <!-- 静态IP服务 -->
         <service
