@@ -223,15 +223,16 @@
                         android:id="@+id/mp3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"
                         android:background="@color/white"
                         android:gravity="right|center"
                         android:inputType="number"
                         android:text="请输入MP3通道"
                         android:textColor="#999999"
                         android:textColorHint="@color/aliceblue"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/imageView"
+                        android:layout_toStartOf="@+id/imageView" />
 
                     <ImageView
                         android:layout_width="7dp"
@@ -239,7 +240,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
-                        android:background="@mipmap/xyb" />
+                        android:background="@mipmap/xyb"
+                        android:id="@+id/imageView" />
                 </RelativeLayout>
 
                 <View

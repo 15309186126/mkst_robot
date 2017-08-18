@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mkst.robot.push.R;
-import com.mkst.robot.push.activitys.CommandAcitivty;
+import com.mkst.robot.push.activitys.CommandActivity;
 
 import java.util.List;
 import java.util.Map;
@@ -69,11 +69,11 @@ public class SpinnerAdapter extends BaseAdapter {
         //然后可以直接使用这个类中的控件，对控件进行操作，而不用重复去findViewById了
         viewHolder.imageview.setVisibility(View.GONE);
         if (flag) {
-            if (position == CommandAcitivty.goalnum) {
+            if (position == CommandActivity.goalNum) {
                 viewHolder.imageview.setVisibility(View.VISIBLE);
             }
         } else {
-            if (position == CommandAcitivty.directionnum) {
+            if (position == CommandActivity.directionNum) {
                 viewHolder.imageview.setVisibility(View.VISIBLE);
             }
         }

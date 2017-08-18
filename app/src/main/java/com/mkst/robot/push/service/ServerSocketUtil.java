@@ -204,26 +204,34 @@ public class ServerSocketUtil extends Service {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            //打印Log状态
             Constant.debugLog(IsHave + "IsHAVE");
+
             if (IsHave) {
                 int j = 0;
+
+                //打印Log状态
                 Constant.debugLog(socketList.size() + "IsHAVE");
+
                 while (j < socketList.size()) {
                     Constant.debugLog(socketList.get(j).get("ip") + "socketlist.get(j).get(\"ip\")" + ip + "ip");
                     if (socketList.get(j).get("ip").equals(ip)) {
                         try {
+                            //打印Log状态
                             Constant.debugLog("inclose");
                             ((InputStream) socketList.get(j).get("in")).close();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                         try {
+                            //打印Log状态
                             Constant.debugLog("socketclose");
                             ((Socket) socketList.get(j).get("socket")).close();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                         socketList.remove(j);
+                        //打印Log状态
                         Constant.debugLog("socketlist" + socketList.toString());
                         break;
                     }
@@ -255,10 +263,12 @@ public class ServerSocketUtil extends Service {
                 buf = (byte) in.read();
             } catch (IOException e) {
                 e.printStackTrace();
+                //打印Log状态
                 Constant.debugLog(e.toString());
                 removeSocket(ip);
             }
             len1++;
+            //打印Log状态
             Constant.debugLog("buf内容：" + buf + "len1" + len1);
             if (-1 == buf) {
                 removeSocket(ip);
@@ -280,8 +290,10 @@ public class ServerSocketUtil extends Service {
                 msg = msg.trim();
                 if (msg != null) {
                     ++len;
+                    //打印Log状态
                     Constant.debugLog("msg的内容： " + msg + "  次数：" + len);
                     byte[] bytes = msg.getBytes();
+                    //打印Log状态
                     Constant.debugLog(bytes[0] + "bytes");
                     flag = false;
                     List<String> str = new ArrayList<>();

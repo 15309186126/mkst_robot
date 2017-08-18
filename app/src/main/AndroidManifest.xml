@@ -49,7 +49,7 @@
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
 
         <activity
-            android:name=".activitys.CommandAcitivty"
+            android:name=".activitys.CommandActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
 

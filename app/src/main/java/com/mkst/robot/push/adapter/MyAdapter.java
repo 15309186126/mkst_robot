@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.mkst.robot.push.R;
-import com.mkst.robot.push.activitys.CommandAcitivty;
+import com.mkst.robot.push.activitys.CommandActivity;
 import com.mkst.robot.push.utils.Constant;
 
 import java.util.List;
@@ -71,7 +71,7 @@ public class MyAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //跳转
-                Intent intent = new Intent(context, CommandAcitivty.class);
+                Intent intent = new Intent(context, CommandActivity.class);
                 //打印log测试
                 Constant.debugLog("commandid" + list.get(position).get("id").toString());
                 intent.putExtra("id", (Integer) list.get(position).get("id"));
