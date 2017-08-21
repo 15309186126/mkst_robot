@@ -29,8 +29,8 @@ public class Constant {
     static String isConnectSocket = "";
 
     //Socket服务器端口
-    public static int ServerPort = 20123;
-    public static int ClientPort = 20123;
+    public static int ServerPort = 8899;
+    public static int ClientPort = 8899;
 
     //是否打印日志
     private static final boolean isDebug = true;

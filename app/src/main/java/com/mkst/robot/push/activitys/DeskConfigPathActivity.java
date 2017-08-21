@@ -33,7 +33,7 @@ import java.util.Map;
 /**
  * 作者: jiayi.zhang
  * 时间: 2017/8/16
- * 描述:
+ * 描述: 设置指令
  */
 
 public class DeskConfigPathActivity extends Activity implements View.OnClickListener {

@@ -88,7 +88,7 @@ public class LaunchActivity extends Activity {
         int endColor = (int) evaluator.evaluate(endProgress, mBgDrawable.getColor(), finalColor);
         // 构建一个属性动画
         ValueAnimator valueAnimator = ObjectAnimator.ofObject(this, property, evaluator, endColor);
-        valueAnimator.setDuration(1500); // 时间
+        valueAnimator.setDuration(3000); // 时间
         valueAnimator.setIntValues(mBgDrawable.getColor(), endColor); // 开始结束值
         valueAnimator.addListener(new AnimatorListenerAdapter() {
             @Override

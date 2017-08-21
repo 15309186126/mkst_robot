@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * 作者: jiayi.zhang
  * 时间: 2017/8/8
- * 描述:
+ * 描述: 编辑命令
  */
 
 public class CommandActivity extends Activity implements View.OnClickListener {
