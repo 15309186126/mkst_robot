@@ -206,6 +206,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Anim
                 if (!IsRight) {
                     startAnimationLeft();
                 } else {
+                    //向RobotActivity传递area
                     Intent intent = new Intent(MainActivity.this, RobotActivity.class);
                     intent.putExtra("id", (Integer) robotData_list.get(position).get("id"));
                     startActivity(intent);
@@ -227,10 +228,12 @@ public class MainActivity extends Activity implements View.OnClickListener, Anim
                     if (areaList != null && areaList.size() > 0 && CURRENT_AREA_id != 0) {
                         if (DeskIsEdit) {
                             if (position == 0) {
+                                //向DeskConfigPathActivity传递area
                                 Intent intent = new Intent(MainActivity.this, DeskConfigPathActivity.class);
                                 intent.putExtra("area", CURRENT_AREA_id);
                                 startActivity(intent);
                             } else {
+                                //向DeskConfigPathActivity传递Id     area
                                 Intent intent = new Intent(MainActivity.this, DeskConfigPathActivity.class);
                                 intent.putExtra("area", CURRENT_AREA_id);
                                 intent.putExtra("id", (Integer) deskData_list.get(position).get("id"));
@@ -285,7 +288,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Anim
             }
         });
 
-        //robotDBHelper.execSQL("update robot set outline= '0' ");
+        robotDBHelper.execSQL("update robot set outline= '0' ");
         receiver = new MyReceiver();
         IntentFilter filter = new IntentFilter();
         filter.addAction("com.jdrd.activity.Main");

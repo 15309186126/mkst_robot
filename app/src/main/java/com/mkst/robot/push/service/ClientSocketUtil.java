@@ -124,6 +124,7 @@ public class ClientSocketUtil extends Service {
         @Override
         public void run() {
             String str = socket.getInetAddress().toString();
+            Constant.debugLog("本地IP地址:"+str);
             final String ip = str.substring(1, str.length());
             Constant.debugLog(ip);
             Handler handler = new Handler(Looper.getMainLooper());

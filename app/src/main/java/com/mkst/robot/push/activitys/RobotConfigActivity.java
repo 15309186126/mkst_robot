@@ -23,12 +23,12 @@ import java.util.Map;
 
 public class RobotConfigActivity extends Activity implements View.OnClickListener {
 
-    private RobotDBHelper robotDBHelper;
-    private static int robotId;
+    private RobotDBHelper robotDBHelper;//数据库帮助类
+    private static int robotId;//机器人id
     private Map robotConfig;
     private EditText name;
     private TextView area_text;
-    public int areaId;
+    public int areaId;//区域id
     private List<Map> areaList;
 
 
@@ -42,14 +42,19 @@ public class RobotConfigActivity extends Activity implements View.OnClickListene
         return R.layout.activity_robot_config;
     }
 
+    /**
+     * 初始化数据
+     */
     @Override
     protected void initWidget() {
         robotDBHelper = RobotDBHelper.getInstance(getApplicationContext());
         name = ((EditText) findViewById(R.id.name));
         findViewById(R.id.sure).setOnClickListener(this);
+        //返回
         findViewById(R.id.setting_back).setOnClickListener(this);
         area_text = (TextView) findViewById(R.id.area_text);
         findViewById(R.id.area).setOnClickListener(this);
+        //获取RobotActivity传递的Id
         Intent intent = getIntent();
         robotId = intent.getIntExtra("id", 0);
     }
@@ -57,6 +62,7 @@ public class RobotConfigActivity extends Activity implements View.OnClickListene
     @Override
     protected void onResume() {
         super.onResume();
+        //查询机器人
         List<Map> robotList = robotDBHelper.queryListMap("select * from robot where id = '" + robotId + "'", null);
         robotConfig = robotList.get(0);
         name.setHint(robotConfig.get("name").toString());
@@ -78,6 +84,7 @@ public class RobotConfigActivity extends Activity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            //确定
             case R.id.sure:
                 Constant.debugLog("areaId====------>" + areaId);
                 if (!name.getText().toString().trim().equals("")) {
@@ -87,10 +94,13 @@ public class RobotConfigActivity extends Activity implements View.OnClickListene
                 }
                 finish();
                 break;
+            //返回
             case R.id.setting_back:
                 finish();
                 break;
+            //跳转到区域
             case R.id.area:
+                //向AreaConfig传递数据
                 Intent intent = new Intent(RobotConfigActivity.this, AreaConfig.class);
                 intent.putExtra("id", robotId);
                 startActivity(intent);

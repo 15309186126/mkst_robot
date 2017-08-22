@@ -46,6 +46,7 @@ public class RobotActivity extends Activity implements View.OnClickListener {
     @Override
     protected void initWidget() {
         robotDBHelper = RobotDBHelper.getInstance(getApplicationContext());
+        //获取MainActivity传递的Id
         Intent intent = getIntent();
         robotId = intent.getIntExtra("id", 0);
         //设置
@@ -115,6 +116,8 @@ public class RobotActivity extends Activity implements View.OnClickListener {
         ((TextView) findViewById(R.id.electric)).setText(robotConfig.get("electric").toString());
         ((TextView) findViewById(R.id.command_num)).setText(robotConfig.get("commandnum").toString());
         ((TextView) findViewById(R.id.last_location)).setText(robotConfig.get("lastlocation").toString());
+
+        //障碍物
         if ((int) robotConfig.get("obstacle") == 0) {
             ((TextView) findViewById(R.id.obstacle)).setText("无");
         } else {
@@ -127,6 +130,7 @@ public class RobotActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             //点击设置
             case R.id.setting_redact:
+                //向RobotConfigActivity传递数据
                 Intent intent = new Intent(RobotActivity.this, RobotConfigActivity.class);
                 intent.putExtra("id", robotId);
                 startActivity(intent);

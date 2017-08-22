@@ -86,8 +86,8 @@ public class DeskConfigPathActivity extends Activity implements View.OnClickList
     @Override
     protected void initWidget() {
         robotDBHelper = RobotDBHelper.getInstance(getApplicationContext());
-
-        Intent intent = getIntent();// 获取数据
+        // 获取MainActivity传递的id  area
+        Intent intent = getIntent();
         deskId = intent.getIntExtra("id", 0);
         areaId = intent.getIntExtra("area", 0);
 
@@ -142,7 +142,7 @@ public class DeskConfigPathActivity extends Activity implements View.OnClickList
         viewPager.setAdapter(new MyPagerAdapter(listViews));
         viewPager.setCurrentItem(0);
         titles = new TextView[]{tab01, tab02};
-        
+
         viewPager.setOffscreenPageLimit(titles.length);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             int one = offset * 2 + lineWidth;
@@ -374,7 +374,7 @@ public class DeskConfigPathActivity extends Activity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
-        //refreshCommand();
+        refreshCommand();
     }
 
     @Override
