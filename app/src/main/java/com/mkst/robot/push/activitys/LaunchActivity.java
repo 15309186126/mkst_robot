@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.mkst.robot.push.R;
 import com.mkst.robot.push.app.Activity;
+import com.mkst.robot.push.helper.RobotDBHelper;
 
 import net.qiujuer.genius.res.Resource;
 import net.qiujuer.genius.ui.compat.UiCompat;
@@ -60,6 +61,8 @@ public class LaunchActivity extends Activity {
         startAnim(1f, new Runnable() {
             @Override
             public void run() {
+                //初始化数据库
+                RobotDBHelper.getInstance(getApplicationContext());
                 reallySkip();
             }
         });

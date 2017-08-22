@@ -373,15 +373,25 @@ public class MainActivity extends Activity implements View.OnClickListener, Anim
                     startAnimationLeft();
                 }
                 break;
+            //上
             case R.id.up:
+                robotDialog("*u+6+#");
                 break;
+            //下
             case R.id.down:
+                robotDialog("*d+6+#");
                 break;
+            //左
             case R.id.left:
+                robotDialog("*l+6+#");
                 break;
+            //右
             case R.id.right:
+                robotDialog("*r+6+#");
                 break;
+            //停止
             case R.id.stop:
+                robotDialog("*s+6+#");
                 break;
             case R.id.shrink:
                 if (!IsRight) {

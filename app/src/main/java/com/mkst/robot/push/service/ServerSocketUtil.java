@@ -51,6 +51,7 @@ public class ServerSocketUtil extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        //初始化数据库
         robotDBHelper = RobotDBHelper.getInstance(getApplicationContext());
         intent = new Intent();
 
@@ -67,18 +68,31 @@ public class ServerSocketUtil extends Service {
     }
 
     public String startServerSocket(int port) throws IOException {
-
         //提升service进程优先级
         setServiceForeground();
-
+        //创建ServerSocket对象
         serverSocket = new ServerSocket(port);
+        //创建Socket对象
         Socket socket;
-        Constant.debugLog("serverSocket is create....");
+        //打印log
+        Constant.debugLog("serverSocket正在创建......");
         while (true) {
-            Constant.debugLog("waiting for connect....");
+            //打印Log
+            Constant.debugLog("正在等待连接......");
+            //接收请求
             socket = serverSocket.accept();
+
+            //作用:每隔一段时间检查服务器是否处于活动状态，如果服务器端长时间没响应，自动关闭客户端socket
+            //防止服务器端无效时，客户端长时间处于连接状态
             socket.setKeepAlive(true);
+
+            //客户端socket在接收数据时，有两种超时:
+            // 1.连接服务器超时，即连接超时;
+            // 2.连接服务器成功后，接收服务器数据超时，即接收超时
+            //设置socket 读取数据流的超时时间
             socket.setSoTimeout(9000);
+
+            //开启线程
             new Thread(new Task(socket)).start();
         }
     }
@@ -87,10 +101,12 @@ public class ServerSocketUtil extends Service {
      * 为此服务设置一个状态栏，使服务始终处于前台，提高服务等级
      */
     private void setServiceForeground() {
+        //系统通知栏
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setContentTitle("Socket通讯服务");
-        builder.setContentText("此服务用于通讯，请勿关闭");
+        builder.setSmallIcon(R.mipmap.sjx_logo);//通知栏图片
+        builder.setContentTitle("Socket通讯服务");//通知栏标题
+        builder.setContentText("此服务用于通讯，请勿关闭");//通知栏内容
+
         Intent intent = new Intent();
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(pendingIntent);
@@ -99,30 +115,7 @@ public class ServerSocketUtil extends Service {
         startForeground(1, notification);
     }
 
-    /**
-     * 发送数据给ros和大屏，其他类可通过调用ServerSocketUtil.sendDateToClient(String str, String ip)来发送数据
-     *
-     * @param str:要发送的字符串
-     * @param ip:要发送的客户端的IP, Constant.ip_ros为小屏IP, Constant.ip_bigScreen为大屏IP
-     */
-    public static synchronized void sendDateToClient(String str, String ip, Socket socket) throws IOException {
-
-        try {
-            if (socket.isClosed()) {
-
-            } else {
-                out = socket.getOutputStream();
-                if (ip != null) {
-                    if (out != null) {
-                        out.write(str.getBytes());
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    //创建Task线程
     class Task implements Runnable {
         private Socket socket;
 
@@ -134,7 +127,9 @@ public class ServerSocketUtil extends Service {
         public void run() {
             String str = socket.getInetAddress().toString();
             final String ip = str.substring(1, str.length());
+            //打印本机Ip地址
             Constant.debugLog(ip);
+            //开启Hanlder
             Handler handler = new Handler(Looper.getMainLooper());
             handler.post(new Runnable() {
                 @Override
@@ -149,7 +144,8 @@ public class ServerSocketUtil extends Service {
                     if (robotList.get(i).get("ip").equals(ip)) {
                         IsHave = true;
                         robotDBHelper.execSQL("update robot set outline = '1' where ip= '" + ip + "'");
-                        Constant.debugLog("socketlist" + socketList.toString());
+                        //打印socketList
+                        Constant.debugLog("socketList" + socketList.toString());
                         break;
                     }
                 }
@@ -249,7 +245,33 @@ public class ServerSocketUtil extends Service {
         }
     }
 
+    /**
+     * @param str:要发送的字符串
+     * @param ip:要发送的客户端的IP
+     */
+    public static synchronized void sendDateToClient(String str, String ip, Socket socket) throws IOException {
+        try {
+            //socket.isConnected == true代表连接成功
+            //socket.isConnected==false代表连接失败
+            if (socket.isClosed()) {
+                Constant.debugLog("socket.isConnected====>连接失败");
+            } else {
+                //获取Socket的OutputStream对象用于发送数据。
+                out = socket.getOutputStream();
+                //判断ip是否为空
+                if (ip != null) {
+                    if (out != null) {
+                        out.write(str.getBytes());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void inputStreamParse(InputStream in, String ip, OutputStream out) {
+        //创建一个byte类型的buffer字节数组，用于读取数据
         byte[] buffer = new byte[1024];
         int i = 0;
         boolean flag = false;
@@ -263,17 +285,21 @@ public class ServerSocketUtil extends Service {
                 buf = (byte) in.read();
             } catch (IOException e) {
                 e.printStackTrace();
-                //打印Log状态
+                //打印Log日志
                 Constant.debugLog(e.toString());
+                //删除ip
                 removeSocket(ip);
             }
             len1++;
-            //打印Log状态
+            //打印Log日志
             Constant.debugLog("buf内容：" + buf + "len1" + len1);
+
             if (-1 == buf) {
+                //删除ip
                 removeSocket(ip);
                 break;
             } else if (0 == buf) {
+                //删除ip
                 removeSocket(ip);
                 break;
             } else if ('*' == buf) {
@@ -282,6 +308,7 @@ public class ServerSocketUtil extends Service {
             } else if ('#' == buf) {
                 flag = false;
             }
+            //flag ==false
             if (flag) {
                 buffer[i] = buf;
                 i++;
@@ -427,6 +454,7 @@ public class ServerSocketUtil extends Service {
                 socket = (Socket) socketList.get(j).get("socket");
                 socketList.remove(j);
                 robotDBHelper.execSQL("update robot set outline= '0' where ip= '" + ip + "'");
+                //关闭连接
                 sendBroadcastMain("robot_unconnect");
                 sendBroadcastRobot("robot");
                 try {
