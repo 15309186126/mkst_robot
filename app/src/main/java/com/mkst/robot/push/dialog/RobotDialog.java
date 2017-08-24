@@ -101,7 +101,9 @@ public class RobotDialog extends Dialog {
                 robotData_list.add(map);
                 i++;
             }
+            //打印Log
             Constant.debugLog(robotData_list.toString());
+            //简单的适配器
             robotAdapter = new SimpleAdapter(getContext(), robotData_list, R.layout.robot_grid_item, from, to);
             gridView.setAdapter(robotAdapter);
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -153,6 +155,7 @@ public class RobotDialog extends Dialog {
                     public void run() {
                         if (out != null) {
                             try {
+                                //写入数据
                                 out.write("*s+6+#".getBytes());
                                 synchronized (thread) {
                                     thread.wait();

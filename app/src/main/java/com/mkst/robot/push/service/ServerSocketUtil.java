@@ -232,6 +232,7 @@ public class ServerSocketUtil extends Service {
                         break;
                     }
                     j++;
+                    //打印Log
                     Constant.debugLog("j socketlist" + j);
                 }
             }
