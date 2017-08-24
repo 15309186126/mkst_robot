@@ -210,30 +210,32 @@ public class ServerSocketUtil extends Service {
                 Constant.debugLog(socketList.size() + "IsHAVE");
 
                 while (j < socketList.size()) {
+                    //打印Log状态
                     Constant.debugLog(socketList.get(j).get("ip") + "socketlist.get(j).get(\"ip\")" + ip + "ip");
+                    //判断ip是否相等
                     if (socketList.get(j).get("ip").equals(ip)) {
                         try {
                             //打印Log状态
-                            Constant.debugLog("inclose");
+                            Constant.debugLog("inClose");
                             ((InputStream) socketList.get(j).get("in")).close();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                         try {
                             //打印Log状态
-                            Constant.debugLog("socketclose");
+                            Constant.debugLog("socketClose");
                             ((Socket) socketList.get(j).get("socket")).close();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                         socketList.remove(j);
                         //打印Log状态
-                        Constant.debugLog("socketlist" + socketList.toString());
+                        Constant.debugLog("socketList" + socketList.toString());
                         break;
                     }
                     j++;
                     //打印Log
-                    Constant.debugLog("j socketlist" + j);
+                    Constant.debugLog("j=====> socketList" + j);
                 }
             }
             Map<String, Object> map;
@@ -293,7 +295,7 @@ public class ServerSocketUtil extends Service {
             }
             len1++;
             //打印Log日志
-            Constant.debugLog("buf内容：" + buf + "len1" + len1);
+            Constant.debugLog("buf内容===>" + buf + "len1===>" + len1);
 
             if (-1 == buf) {
                 //删除ip
@@ -340,6 +342,7 @@ public class ServerSocketUtil extends Service {
                     if (Integer.valueOf(str.get(str.size() - 1)) == msg.length() + 2) {
                         Constant.debugLog("长度正确");
                         switch (bytes[0]) {
+                            //电量
                             case 97:
                                 robotDBHelper.execSQL("update robot set electric = '" + str.get(0) + "' where ip= '" + ip + "'");
                                 sendBroadcastRobot("robot");
@@ -353,6 +356,7 @@ public class ServerSocketUtil extends Service {
                                     }
                                 }
                                 break;
+                            //运动状态   0->直行前进  1->左转   2->右转   3->旋转
                             case 98:
                                 robotDBHelper.execSQL("update robot set state = '" + str.get(0) + "' where ip= '" + ip + "'");
                                 sendBroadcastRobot("robot");
@@ -366,6 +370,7 @@ public class ServerSocketUtil extends Service {
                                     }
                                 }
                                 break;
+                            //机器人状态  0->空闲   0->送餐   0->故障
                             case 99:
                                 robotDBHelper.execSQL("update robot set robotstate = '" + str.get(0) + "' where ip= '" + ip + "'");
                                 sendBroadcastRobot("robot");
@@ -379,6 +384,7 @@ public class ServerSocketUtil extends Service {
                                     }
                                 }
                                 break;
+                            //障碍物
                             case 100:
                                 robotDBHelper.execSQL("update robot set obstacle = '" + str.get(0) + "' where ip= '" + ip + "'");
                                 sendBroadcastRobot("robot");
@@ -392,6 +398,7 @@ public class ServerSocketUtil extends Service {
                                     }
                                 }
                                 break;
+                            //最后坐标
                             case 101:
                                 robotDBHelper.execSQL("update robot set lastlocation = '" + str.get(0) + "' where ip= '" + ip + "'");
                                 sendBroadcastRobot("robot");
@@ -405,7 +412,7 @@ public class ServerSocketUtil extends Service {
                                     }
                                 }
                                 break;
-                            //r
+                            //接收应答   0成功   1命令校验失败
                             case 114:
                                 if (str.get(0).equals("0")) {
                                     sendBroadcastMain("robot_receive_succus");
@@ -415,7 +422,8 @@ public class ServerSocketUtil extends Service {
                                 break;
                         }
                     } else {
-                        Constant.debugLog("长度不对");
+                        //打印Log
+                        Constant.debugLog("====长度不对=====");
                         if (out != null) {
                             string = "*r+1+8+#";
                             try {
@@ -434,8 +442,9 @@ public class ServerSocketUtil extends Service {
                     flag2 = false;
                 }
             } else {
+                //打印Log
                 Constant.debugLog((char) buf + "");
-                Constant.debugLog("数据格式不对");
+                Constant.debugLog("=====数据格式不对=====");
                 string = "*r+1+8+#";
                 try {
                     out.write(string.getBytes());

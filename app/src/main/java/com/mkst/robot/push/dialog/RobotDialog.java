@@ -145,6 +145,7 @@ public class RobotDialog extends Dialog {
         }
     }
 
+    //命令集合
     public static void sendCommandList() {
         Constant.debugLog(robotList.toString());
         for (Map map : ServerSocketUtil.socketList) {
@@ -155,13 +156,14 @@ public class RobotDialog extends Dialog {
                     public void run() {
                         if (out != null) {
                             try {
-                                //写入数据
+                                //等待
                                 out.write("*s+6+#".getBytes());
                                 synchronized (thread) {
                                     thread.wait();
                                 }
                                 for (int i = 0, size = robotList.size(); i < size; i++) {
                                     switch ((int) robotList.get(i).get("type")) {
+                                        //前进
                                         case 0:
                                             List<Map> card_list = robotDBHelper.queryListMap("select * from card where id = '" + robotList.get(i).get("goal") + "'", null);
                                             if (card_list != null && card_list.size() > 0) {
@@ -174,6 +176,7 @@ public class RobotDialog extends Dialog {
                                                 thread.wait();
                                             }
                                             break;
+                                        //左转
                                         case 1:
                                             sendStr = "*d+" + robotList.get(i).get("speed")
                                                     + "+" + robotList.get(i).get("music") + "+" + robotList.get(i).get("outime") + "+"
@@ -183,6 +186,7 @@ public class RobotDialog extends Dialog {
                                                 thread.wait();
                                             }
                                             break;
+                                        //右转
                                         case 2:
                                             sendStr = "*r+" + robotList.get(i).get("speed")
                                                     + "+" + robotList.get(i).get("music") + "+" + robotList.get(i).get("outime") + "+"
@@ -192,6 +196,7 @@ public class RobotDialog extends Dialog {
                                                 thread.wait();
                                             }
                                             break;
+                                        //旋转
                                         case 3:
                                             sendStr = "*w+" + robotList.get(i).get("music") + "+" + robotList.get(i).get("outime") + "+"
                                                     + robotList.get(i).get("shownumber") + "+" + robotList.get(i).get("showcolor");
